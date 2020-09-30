@@ -3,7 +3,8 @@
 #--Required Packages-
 #-ufw
 #-fail2ban
-
+#-net-tools
+sudo apt install --install-recommends ufw fail2ban net-tools -y
 # --- Setup UFW rules
 sudo ufw limit 22/tcp  
 sudo ufw allow 80/tcp  
@@ -33,3 +34,4 @@ sudo systemctl start fail2ban
 
 echo "listening ports"
 sudo netstat -tunlp
+
