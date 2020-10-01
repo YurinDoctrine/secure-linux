@@ -1,11 +1,8 @@
 #!/bin/bash
-#-----------------------
-#--Required Packages-
-#-ufw
-#-fail2ban
-#-net-tools
+#--Required Packages: ufw fail2ban net-tools
 sudo apt install --install-recommends ufw fail2ban net-tools -y
-# --- Setup UFW rules
+
+#--Setup UFW rules
 sudo ufw limit 22/tcp  
 sudo ufw allow 80/tcp  
 sudo ufw allow 443/tcp  
@@ -13,7 +10,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
-# --- Harden /etc/sysctl.conf
+#--Harden /etc/sysctl.conf
 printf "kernel.dmesg_restrict = 1
 kernel.modules_disabled=1
 kernel.kptr_restrict = 1
@@ -38,17 +35,19 @@ net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
 vm.dirty_bytes = 4194304" > /etc/sysconf.conf
-# --- PREVENT IP SPOOFS
+
+#--PREVENT IP SPOOFS
 cat <<EOF > /etc/host.conf
 order bind,hosts
 multi on
 EOF
 
-# --- Enable fail2ban
+#--Enable fail2ban
 sudo cp fail2ban.local /etc/fail2ban/
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 
+#--Listen current traffic
 echo "listening ports"
 sudo netstat -tunlp
 
