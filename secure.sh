@@ -1,12 +1,12 @@
 #!/bin/bash
 #--Required Packages: ufw fail2ban net-tools
-sudo apt install --install-recommends ufw fail2ban net-tools -y
+sudo apt install --install-recommends ufw fail2ban certbot net-tools -y
 
 #--Setup UFW rules
-sudo ufw limit 22/tcp  
-sudo ufw allow 80/tcp  
-sudo ufw allow 443/tcp  
-sudo ufw default deny incoming  
+sudo ufw limit 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
@@ -46,6 +46,14 @@ EOF
 sudo cp fail2ban.local /etc/fail2ban/
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
+
+#--Pacify apport
+sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
+
+#--Renew certificates
+sudo systemctl stop httpd
+sudo certbot renew
+sudo systemctl start httpd
 
 #--Listen current traffic
 echo "listening ports"
