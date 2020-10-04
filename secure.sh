@@ -1,6 +1,6 @@
 #!/bin/bash
 #--Required Packages: ufw fail2ban net-tools
-sudo apt install --install-recommends ufw fail2ban certbot net-tools -y
+sudo apt install --install-recommends ufw fail2ban mini-httpd certbot net-tools -y
 
 #--Setup UFW rules
 sudo ufw limit 22/tcp
@@ -51,9 +51,9 @@ sudo systemctl start fail2ban
 sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 
 #--Renew certificates
-sudo systemctl stop httpd
+sudo systemctl stop mini-httpd.service
 sudo certbot renew
-sudo systemctl start httpd
+sudo systemctl start mini-httpd.service
 
 #--Listen current traffic
 echo "listening ports"
