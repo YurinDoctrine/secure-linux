@@ -1,6 +1,6 @@
 #!/bin/bash
 #--Required Packages: ufw fail2ban net-tools
-sudo apt install --install-recommends ufw fail2ban mini-httpd certbot net-tools -y
+sudo apt install --install-recommends ufw fail2ban mini-httpd certbot net-tools apt-transport-https -y
 
 #--Setup UFW rules
 sudo ufw limit 22/tcp
