@@ -5,6 +5,9 @@ touch testfile
 echo “ASDFZXCV:hf:testfile” > /dev/zero && ls
 echo "if this above returns a missing testfile file, that means you're infected(Press ANY KEY)."
 read -p '>: '
+rm -rf testfile
+clear
+
 
 #--Check for unsigned kernel modules
 for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo "no signature for module: ${mod}" ; done
