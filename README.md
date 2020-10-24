@@ -11,5 +11,5 @@ git clone https://github.com/YurinDoctrine/secure-linux.git
 ```sh
  secure-linux/
 $ sudo chmod +x secure-linux.sh
-$ ./secure-linux.sh
+$ sudo ./secure-linux.sh
 ```
