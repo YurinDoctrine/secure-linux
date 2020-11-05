@@ -1,15 +1,9 @@
 # secure-linux
 
-## CLONING
+## CLONING and RUNNING
 
 ```sh
-git clone https://github.com/YurinDoctrine/secure-linux.git
-```
-
-### RUNNING
-
-```sh
- secure-linux/
-$ sudo chmod +x secure-linux.sh
-$ sudo ./secure-linux.sh
+    curl https://raw.githubusercontent.com/YurinDoctrine/secure-linux/main/secure-linux.sh >secure-linux.sh &&
+        chmod 755 secure-linux.sh &&
+        ./secure-linux.sh
 ```
