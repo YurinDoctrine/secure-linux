@@ -1,4 +1,6 @@
 #!/bin/bash
+clear
+
 #--Check if user infected or neither
 cd
 touch testfile
