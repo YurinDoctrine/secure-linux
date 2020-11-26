@@ -23,7 +23,6 @@ for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "s
             sudo pacman -S --noconfirm ufw fail2ban nginx certbot net-tools ansible
 		fi
 
-
 #--Setup UFW rules
 sudo ufw limit 22/tcp
 sudo ufw allow 80/tcp
