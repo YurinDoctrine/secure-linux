@@ -14,7 +14,15 @@ clear
 for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo "no signature for module: ${mod}"; done
 
 #--Required Packages: ufw fail2ban net-tools
-sudo apt install --install-recommends ufw fail2ban nginx certbot net-tools apt-transport-https ansible -y
+		which apt >/dev/null 2>&1
+		if [ $? -eq 0 ]; then
+            sudo apt install --install-recommends ufw fail2ban nginx certbot net-tools apt-transport-https ansible -y
+		fi
+		which pacman >/dev/null 2>&1
+		if [ $? -eq 0 ]; then
+            sudo pacman -S --noconfirm ufw fail2ban nginx certbot net-tools ansible
+		fi
+
 
 #--Setup UFW rules
 sudo ufw limit 22/tcp
@@ -105,9 +113,9 @@ sudo cat <<EOF >/etc/fail2ban/jail.local
 EOF
 
 #--Renew certificates
-sudo systemctl stop mini-httpd.service
+sudo systemctl stop httpd
 sudo certbot renew
-sudo systemctl start mini-httpd.service
+sudo systemctl start httpd
 
 #--Listen current traffic
 echo "listening ports"
