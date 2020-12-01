@@ -32,7 +32,7 @@ sudo ufw default allow outgoing
 sudo ufw enable
 
 #--Harden /etc/sysctl.conf
-sudo printf "kernel.dmesg_restrict = 1
+echo -e 'kernel.dmesg_restrict = 1
 kernel.modules_disabled=1
 kernel.kptr_restrict = 1
 net.core.bpf_jit_harden=2
@@ -55,18 +55,14 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
-vm.dirty_bytes = 4194304" >/etc/sysconf.conf
+vm.dirty_bytes = 4194304' | sudo tee -a /etc/sysconf.conf
 
 #--PREVENT IP SPOOFS
-sudo cat <<EOF >/etc/host.conf
-order bind,hosts
-multi on
-EOF
+echo -e 'order bind,hosts
+multi on' | sudo tee -a /etc/host.conf
 
 #--Enable fail2ban
-sudo cp fail2ban.local /etc/fail2ban/
 sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
 
 #--Pacify apport
 sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
@@ -89,9 +85,6 @@ sudo sed -i 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/lo
 sudo chmod o-rx /usr/bin/gcc
 sudo chmod o-rx /usr/bin/as
 
-#--Copy /etc/fail2ban/jail.conf to jail.local to prevent it being changed by updates
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-
 #--Consider restricting file permissions
 sudo chmod og-rwx /etc/cron.*
 
@@ -99,8 +92,7 @@ sudo chmod og-rwx /etc/cron.*
 chmod 750 /home/$USER
 
 #--Fix jail.local
-sudo cat <<EOF >/etc/fail2ban/jail.local
-[DEFAULT]
+echo '[DEFAULT]
  ignoreip = 127.0.0.1/8 ::1
  bantime = 3600
  findtime = 600
@@ -108,8 +100,7 @@ sudo cat <<EOF >/etc/fail2ban/jail.local
  enabled = true
 
 [sshd]
- enabled = true
-EOF
+ enabled = true' | sudo tee -a /etc/fail2ban/jail.local
 
 #--Renew certificates
 sudo systemctl stop httpd
