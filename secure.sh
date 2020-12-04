@@ -1,12 +1,34 @@
 #!/bin/bash
+
+# MIT License
+
+# Copyright (c) 2020 YURIN
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 clear
 
 #--Check if user infected or neither
 cd
 touch testfile
-echo “ASDFZXCV:hf:testfile” >/dev/zero && ls
-echo "if this above returns a missing testfile file, that means you're infected(Press ANY KEY)."
-read -p '>: '
+echo -e “ASDFZXCV:hf:testfile” >/dev/zero && ls
+read -p 'If this above returns a missing testfile file, that means you're infected.[PRESS ENTER TO CONTINUE]'
 rm -rf testfile
 clear
 
@@ -81,18 +103,14 @@ fi
 sudo sed -i 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
 sudo sed -i 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
 
-#--Harden compilers like restricting access to root user only
-sudo chmod o-rx /usr/bin/gcc
-sudo chmod o-rx /usr/bin/as
-
 #--Consider restricting file permissions
 sudo chmod og-rwx /etc/cron.*
 
 #--Double check the permissions of home directories as some might be not strict enough.
-chmod 750 /home/$USER
+sudo chmod 750 $HOME
 
 #--Fix jail.local
-echo '[DEFAULT]
+echo -e '[DEFAULT]
  ignoreip = 127.0.0.1/8 ::1
  bantime = 3600
  findtime = 600
@@ -107,6 +125,5 @@ sudo systemctl stop httpd
 sudo certbot renew
 sudo systemctl start httpd
 
-#--Listen current traffic
-echo "listening ports"
+#--Show current traffic
 sudo netstat -tunlp
