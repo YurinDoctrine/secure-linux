@@ -28,7 +28,7 @@ clear
 cd
 touch testfile
 echo -e “ASDFZXCV:hf:testfile” >/dev/zero && ls
-read -p 'If this above returns a missing testfile file, that means you're infected.[PRESS ENTER TO CONTINUE]'
+read -p 'If this above returns a missing testfile file, that means you are infected.[PRESS ENTER TO CONTINUE]'
 rm -rf testfile
 clear
 
@@ -36,14 +36,14 @@ clear
 for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo "no signature for module: ${mod}"; done
 
 #--Required Packages: ufw fail2ban net-tools
-		which apt >/dev/null 2>&1
-		if [ $? -eq 0 ]; then
-            sudo apt install --install-recommends ufw fail2ban nginx certbot net-tools apt-transport-https ansible -y
-		fi
-		which pacman >/dev/null 2>&1
-		if [ $? -eq 0 ]; then
-            sudo pacman -S --noconfirm ufw fail2ban nginx certbot net-tools ansible
-		fi
+which apt >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+	sudo apt install --install-recommends ufw fail2ban proxychains nginx certbot net-tools apt-transport-https ansible -y
+fi
+which pacman >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+	sudo pacman -S --noconfirm ufw fail2ban proxychains nginx certbot net-tools ansible
+fi
 
 #--Setup UFW rules
 sudo ufw limit 22/tcp
@@ -93,15 +93,20 @@ sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
 
 #--Default umask in /etc/profile or /etc/profile.d/custom.sh could be more strict
-if [ $UID -gt 199 ] && [ "`id -gn`" = "`id -un`" ]; then
-    umask 027
+if [ $UID -gt 199 ] && [ "$(id -gn)" = "$(id -un)" ]; then
+	umask 027
 else
-    umask 027
+	umask 027
 fi
 
 #--Configure minimum & maximum encryption algorithm rounds in /etc/login.defs
 sudo sed -i 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
 sudo sed -i 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
+
+#--Configure /etc/proxychains.conf
+sudo sed -i 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
+sudo sed -i 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
+sudo sed -i 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 
 #--Consider restricting file permissions
 sudo chmod og-rwx /etc/cron.*
