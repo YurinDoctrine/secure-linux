@@ -28,7 +28,8 @@ clear
 cd
 touch testfile
 echo -e “ASDFZXCV:hf:testfile” >/dev/zero && ls
-read -p 'If this above returns a missing testfile file, that means you are infected.[PRESS ENTER TO CONTINUE]'
+echo -e ""
+read -p 'If this above returns a missing testfile file, that means you are infected. [RETURN]'
 rm -rf testfile
 clear
 
