@@ -23,11 +23,10 @@
 # SOFTWARE.
 
 clear
-
 #--Check if user infected or neither
 cd
 touch testfile
-echo -e “ASDFZXCV:hf:testfile” >/dev/zero && ls
+echo -e “ASDFZXCV:hf:testfile” >/dev/zero && ls | grep -w "testfile"
 echo -e ""
 read -p 'If this above returns a missing testfile file, that means you are infected. [RETURN]'
 rm -rf testfile
