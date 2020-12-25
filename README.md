@@ -1,6 +1,6 @@
 # secure-linux
 
-## CLONING and RUNNING
+## CLONNING and RUNNING
 
 ```sh
 curl https://raw.githubusercontent.com/YurinDoctrine/secure-linux/master/secure.sh >secure.sh &&
