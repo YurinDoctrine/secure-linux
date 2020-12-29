@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 clear
+
 #--Check if user infected or neither
 cd
 touch testfile
@@ -31,6 +32,7 @@ echo -e “ASDFZXCV:hf:testfile” >/dev/zero &&
 echo -e ""
 read -p $'If this above returns a missing testfile file, that means you are infected. [RETURN]'
 rm -rf testfile
+
 clear
 
 #--Check for unsigned kernel modules
@@ -43,8 +45,10 @@ if [ $? -eq 0 ]; then
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-	sudo pacman -S --noconfirm ufw fail2ban proxychains nginx certbot net-tools ansible
+	sudo pacman -S --needed --noconfirm ufw fail2ban proxychains nginx certbot net-tools ansible
 fi
+
+clear
 
 #--Setup UFW rules
 sudo ufw limit 22/tcp
@@ -84,9 +88,6 @@ vm.dirty_bytes = 4194304' | sudo tee -a /etc/sysconf.conf
 echo -e 'order bind,hosts
 multi on' | sudo tee -a /etc/host.conf
 
-#--Enable fail2ban
-sudo systemctl enable fail2ban
-
 #--Pacify LLMNR
 sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
 
@@ -124,9 +125,9 @@ echo -e '[DEFAULT]
  enabled = true' | sudo tee -a /etc/fail2ban/jail.local
 
 #--Renew certificates
-sudo systemctl stop httpd
+sudo service httpd stop
 sudo certbot renew
-sudo systemctl start httpd
+sudo service httpd start
 
 #--Show current traffic
 sudo netstat -tunlp
