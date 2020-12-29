@@ -87,9 +87,6 @@ multi on' | sudo tee -a /etc/host.conf
 #--Enable fail2ban
 sudo systemctl enable fail2ban
 
-#--Pacify apport
-sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
-
 #--Pacify LLMNR
 sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
 
