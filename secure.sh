@@ -36,7 +36,7 @@ rm -rf testfile
 clear
 
 #--Check for unsigned kernel modules
-for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo "no signature for module: ${mod}"; done
+for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo -e "no signature for module: ${mod}"; done
 
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
@@ -59,7 +59,7 @@ sudo ufw default allow outgoing
 sudo ufw enable
 
 #--Harden /etc/sysctl.conf
-echo -e 'kernel.dmesg_restrict = 1
+echo -e "kernel.dmesg_restrict = 1
 kernel.modules_disabled=1
 kernel.kptr_restrict = 1
 net.core.bpf_jit_harden=2
@@ -82,11 +82,13 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
-vm.dirty_bytes = 4194304' | sudo tee -a /etc/sysconf.conf
+vm.dirty_bytes = 4194304
+" | sudo tee /etc/sysconf.conf
 
 #--PREVENT IP SPOOFS
-echo -e 'order bind,hosts
-multi on' | sudo tee -a /etc/host.conf
+echo -e "order bind,hosts
+multi on
+" | sudo tee /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
@@ -114,7 +116,7 @@ sudo chmod og-rwx /etc/cron.*
 sudo chmod 750 $HOME
 
 #--Fix jail.local
-echo -e '[DEFAULT]
+echo -e "[DEFAULT]
  ignoreip = 127.0.0.1/8 ::1
  bantime = 3600
  findtime = 600
@@ -122,7 +124,8 @@ echo -e '[DEFAULT]
  enabled = true
 
 [sshd]
- enabled = true' | sudo tee -a /etc/fail2ban/jail.local
+ enabled = true
+ " | sudo tee /etc/fail2ban/jail.local
 
 #--Renew certificates
 sudo killall -9 httpd
