@@ -41,11 +41,11 @@ for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "s
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo apt install ufw fail2ban proxychains nginx certbot net-tools apt-transport-https -y
+    sudo apt install ufw fail2ban proxychains certbot -y
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo pacman -S --needed --noconfirm ufw fail2ban proxychains nginx certbot net-tools
+    yay -S --needed --noconfirm ufw fail2ban proxychains certbot
 fi
 
 clear
