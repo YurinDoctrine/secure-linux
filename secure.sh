@@ -24,20 +24,6 @@
 
 clear
 
-#--Check if user infected or neither
-cd
-touch testfile
-echo -e “ASDFZXCV:hf:testfile” >/dev/zero &&
-    ls | grep -w "testfile"
-echo -e ""
-read -p $'If this above returns a missing testfile file, that means you are infected. [RETURN]'
-rm -rf testfile
-
-clear
-
-#--Check for unsigned kernel modules
-for mod in $(lsmod | tail -n +2 | cut -d' ' -f1); do modinfo ${mod} | grep -q "signature" || echo -e "no signature for module: ${mod}"; done
-
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
