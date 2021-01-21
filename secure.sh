@@ -22,8 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-clear
-
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
