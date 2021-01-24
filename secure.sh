@@ -115,6 +115,3 @@ echo -e "[DEFAULT]
 sudo killall -9 httpd
 sudo certbot renew
 sudo killall -HUP httpd
-
-#--Show current traffic
-sudo netstat -tunlp
