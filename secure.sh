@@ -115,3 +115,32 @@ echo -e "[DEFAULT]
 sudo killall -9 httpd
 sudo certbot renew
 sudo killall -HUP httpd
+
+extra() {
+
+    curl -fsSL https://raw.githubusercontent.com/YurinDoctrine/pentest-base-popular/main/pentest-base-popular.sh >pentest-base-popular.sh &&
+        chmod 755 pentest-base-popular.sh &&
+        ./pentest-base-popular.sh
+}
+
+final() {
+
+    echo -e "
+###############################################################################
+# All Done! Would you also mind to run the author's pentest-base-popular?
+###############################################################################
+"
+
+    read -p $'yes/no >_: ' noc
+    if [[ "$noc" == "yes" ]]; then
+        echo -e "RUNNING ..."
+        extra
+    elif [[ "$noc" == "no" ]]; then
+        echo -e "LEAVING ..."
+        exit 0
+    else
+        echo -e "INVALID VALUE!"
+        final
+    fi
+}
+final
