@@ -66,13 +66,11 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
-vm.dirty_bytes = 4194304
-" | sudo tee /etc/sysconf.conf
+vm.dirty_bytes = 4194304" | sudo tee /etc/sysconf.conf
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
-multi on
-" | sudo tee /etc/host.conf
+multi on" | sudo tee /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
@@ -108,8 +106,7 @@ echo -e "[DEFAULT]
  enabled = true
 
 [sshd]
- enabled = true
- " | sudo tee /etc/fail2ban/jail.local
+ enabled = true" | sudo tee /etc/fail2ban/jail.local
 
 #--Renew certificates
 sudo killall -9 httpd
