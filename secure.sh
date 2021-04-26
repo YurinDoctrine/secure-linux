@@ -113,6 +113,9 @@ sudo killall -9 httpd
 sudo certbot renew
 sudo killall -HUP httpd
 
+#--Clean the logs
+sudo rm -rf /var/log/*
+
 extra() {
 
     curl -fsSL https://raw.githubusercontent.com/YurinDoctrine/pentest-base-popular/main/pentest-base-popular.sh >pentest-base-popular.sh &&
