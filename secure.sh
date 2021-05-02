@@ -95,7 +95,7 @@ sudo sed -i 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 sudo chmod og-rwx /etc/cron.*
 
 #--Double check the permissions of home directories as some might be not strict enough.
-sudo chmod 750 $HOME
+sudo chmod 750 /home
 
 #--Fix jail.local
 echo -e "[DEFAULT]
