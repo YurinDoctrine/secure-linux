@@ -125,6 +125,7 @@ extra() {
 
 final() {
 
+    sleep 0.3 && clear
     echo -e "
 ###############################################################################
 # All Done! Would you also mind to run the author's pentest-base-popular?
