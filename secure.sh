@@ -2,7 +2,7 @@
 
 # MIT License
 
-# Copyright (c) 2020 YURIN
+# Copyright (c) 2021 YURIN
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -95,7 +95,7 @@ sudo sed -i 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 sudo chmod og-rwx /etc/cron.*
 
 #--Double check the permissions of home directories as some might be not strict enough.
-sudo chmod 750 /home/*
+sudo chmod 0750 /home/*
 
 #--Fix jail.local
 echo -e "[DEFAULT]
@@ -119,7 +119,7 @@ sudo rm -rf /var/log/*
 extra() {
 
     curl -fsSL https://raw.githubusercontent.com/YurinDoctrine/pentest-base-popular/main/pentest-base-popular.sh >pentest-base-popular.sh &&
-        chmod 755 pentest-base-popular.sh &&
+        chmod 0755 pentest-base-popular.sh &&
         ./pentest-base-popular.sh
 }
 
