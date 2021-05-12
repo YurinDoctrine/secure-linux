@@ -73,7 +73,7 @@ echo -e "order bind,hosts
 multi on" | sudo tee /etc/host.conf
 
 #--Pacify LLMNR
-sudo sed -i 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
+sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
 
 #--Default umask in /etc/profile or /etc/profile.d/custom.sh could be more strict
 if [ $UID -gt 199 ] && [ "$(id -gn)" = "$(id -un)" ]; then
@@ -83,13 +83,13 @@ else
 fi
 
 #--Configure minimum & maximum encryption algorithm rounds in /etc/login.defs
-sudo sed -i 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
-sudo sed -i 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
+sudo sed -i -e 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
+sudo sed -i -e 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
 
 #--Configure /etc/proxychains.conf
-sudo sed -i 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
-sudo sed -i 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
-sudo sed -i 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
+sudo sed -i -e 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
+sudo sed -i -e 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
+sudo sed -i -e 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 
 #--Consider restricting file permissions
 sudo chmod og-rwx /etc/cron.*
