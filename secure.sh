@@ -117,7 +117,7 @@ sudo killall -HUP httpd
 sudo rm -rf /var/log/*
 
 extra() {
-
+    cd /tmp
     curl -fsSL https://raw.githubusercontent.com/YurinDoctrine/pentest-base-popular/main/pentest-base-popular.sh >pentest-base-popular.sh &&
         chmod 0755 pentest-base-popular.sh &&
         ./pentest-base-popular.sh
