@@ -25,11 +25,11 @@
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo apt install -y --no-install-recommends openssl openssh-server ufw fail2ban net-tools proxychains certbot vsftpd
+    sudo apt install -y --no-install-recommends openssl ufw fail2ban net-tools proxychains certbot
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    yay -S --needed --noconfirm openssl openssh ufw fail2ban net-tools proxychains certbot vsftpd
+    yay -S --needed --noconfirm openssl ufw fail2ban net-tools proxychains certbot
 fi
 
 clear
