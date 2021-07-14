@@ -97,6 +97,9 @@ sudo chmod og-rwx /etc/cron.*
 #--Double check the permissions of home directories as some might be not strict enough.
 sudo chmod 0750 /home/*
 
+#--Remove no password sudo rights
+sudo sed -i -e 's/^%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
 #--Fix jail.local
 echo -e "[DEFAULT]
  ignoreip = 127.0.0.1/8 ::1
