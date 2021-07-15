@@ -25,22 +25,27 @@
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo apt install -fy --assume-yes --no-install-recommends openssl ufw fail2ban net-tools proxychains certbot
+    sudo apt install -fy --assume-yes --no-install-recommends openssh-server openssl ufw fail2ban net-tools unattended-upgrades proxychains certbot
+    sudo dpkg-reconfigure -plow unattended-upgrades
+    echo -e 'APT::Periodic::AutocleanInterval “7”;' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    yay -S --needed --noconfirm openssl ufw fail2ban net-tools proxychains certbot
+    yay -S --needed --noconfirm openssh openssl ufw fail2ban net-tools proxychains certbot
 fi
 
 clear
 
 #--Setup UFW rules
+sudo ufw --force enable
 sudo ufw limit 22/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+sudo ufw allow in on lo
+sudo ufw allow out on lo
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw enable
+sudo ufw reload
 
 #--Harden /etc/sysctl.conf
 echo -e "kernel.dmesg_restrict = 1
@@ -67,10 +72,16 @@ net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
 vm.dirty_bytes = 4194304" | sudo tee /etc/sysconf.conf
+sudo sysctl -a
+sudo sysctl -A
+sudo sysctl mib
+sudo sysctl net.ipv4.conf.all.rp_filter
+sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
 
 #--PREVENT IP SPOOFS
-echo -e "order bind,hosts
-multi on" | sudo tee /etc/host.conf
+echo -e ": order bind,hosts
+: multi on
+: nospoof on" | sudo tee -a /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
