@@ -26,7 +26,10 @@
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo apt install -fy --assume-yes --no-install-recommends openssl ufw fail2ban net-tools unattended-upgrades proxychains certbot
-    echo -e 'APT::Periodic::AutocleanInterval “7”;' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades
+    echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
+    echo -e 'APT::Periodic::Download-Upgradeable-Packages "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
+    echo -e 'APT::Periodic::Update-Package-Lists "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
+    echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
