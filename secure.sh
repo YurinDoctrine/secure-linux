@@ -29,6 +29,7 @@ if [ $? -eq 0 ]; then
     echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades
     echo -e 'APT::Periodic::Download-Upgradeable-Packages "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
     echo -e 'APT::Periodic::Update-Package-Lists "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
+    echo -e 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
     echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
 fi
 which pacman >/dev/null 2>&1
@@ -128,8 +129,12 @@ sudo killall -9 httpd
 sudo certbot renew
 sudo killall -HUP httpd
 
+#--Harden host
+sudo chmod 644 /etc/hosts.allow
+sudo chmod 644 /etc/hosts.deny
+
 #--Clean the logs
-sudo rm -rf /var/log/*
+sudo rm -rfd /var/log/*
 
 extra() {
     cd /tmp
