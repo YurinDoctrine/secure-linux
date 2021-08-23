@@ -25,12 +25,15 @@
 #--Required Packages: ufw fail2ban net-tools
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo apt install -fy --assume-yes --no-install-recommends openssl ufw fail2ban net-tools unattended-upgrades proxychains ca-certificates certbot
-    echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo apt install -f --assume-yes --no-install-recommends openssl ufw fail2ban net-tools unattended-upgrades proxychains ca-certificates certbot
+    echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee /etc/apt/apt.conf.d/50unattended-upgrades
+    echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'APT::Periodic::Download-Upgradeable-Packages "1";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'APT::Periodic::Update-Package-Lists "1";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'Unattended-Upgrade::Remove-Unused-Dependencies "true";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
-    echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
+    echo -e 'Unattended-Upgrade::AutoFixInterruptedDpkg "true";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
+    echo -e 'Unattended-Upgrade::MinimalSteps "true";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo dpkg-reconfigure -f noninteractive unattended-upgrades
 fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -74,7 +77,11 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
-vm.dirty_bytes = 4194304" | sudo tee /etc/sysconf.conf
+vm.dirty_bytes = 4194304
+vm.dirty_ratio=80
+vm.dirty_background_ratio=5
+vm.dirty_expire_centisecs=12000
+vm.overcommit_memory=1" | sudo tee -a /etc/sysconf.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl mib
@@ -134,7 +141,7 @@ sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
 #--Clean the logs
-sudo rm -rfd /var/log/*
+sudo rm -rfd ~/.bash_history /var/log/*
 
 extra() {
     cd /tmp
