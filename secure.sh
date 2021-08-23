@@ -83,7 +83,7 @@ sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
-multi on" | sudo tee /etc/host.conf
+multi on" | sudo tee -a /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
