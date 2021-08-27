@@ -81,7 +81,7 @@ vm.dirty_bytes = 4194304
 vm.dirty_ratio=80
 vm.dirty_background_ratio=5
 vm.dirty_expire_centisecs=12000
-vm.overcommit_memory=1" | sudo tee -a /etc/sysconf.conf
+vm.overcommit_memory=1" | sudo tee /etc/sysconf.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl mib
