@@ -80,10 +80,11 @@ net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
 vm.dirty_bytes = 4194304
-vm.dirty_ratio=80
-vm.dirty_background_ratio=5
-vm.dirty_expire_centisecs=12000
-vm.overcommit_memory=1" | sudo tee /etc/sysconf.conf
+vm.dirty_ratio = 80
+vm.dirty_background_ratio = 5
+vm.dirty_expire_centisecs = 12000
+vm.overcommit_memory = 1
+kernel.sched_energy_aware = 1" | sudo tee /etc/sysconf.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl mib
@@ -141,6 +142,9 @@ sudo killall -HUP httpd
 #--Harden host
 sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
+
+#--Mask systemd-resolved
+sudo systemctl mask systemd-resolved  >/dev/null 2>&1
 
 #--Clean the logs
 sudo rm -rfd ~/.bash_history /var/log/*
