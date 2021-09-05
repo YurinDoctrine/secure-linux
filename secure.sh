@@ -86,13 +86,8 @@ net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
-vm.vfs_cache_pressure=50
 vm.dirty_background_bytes = 4194304
 vm.dirty_bytes = 4194304
-vm.dirty_ratio = 10
-vm.dirty_background_ratio = 5
-vm.dirty_expire_centisecs = 12000
-vm.overcommit_memory = 1
 kernel.sched_energy_aware = 1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -a
 sudo sysctl -A
