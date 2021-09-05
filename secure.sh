@@ -86,6 +86,7 @@ net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
+vm.vfs_cache_pressure=50
 vm.dirty_background_bytes = 4194304
 vm.dirty_bytes = 4194304
 vm.dirty_ratio = 10
