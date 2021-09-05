@@ -93,7 +93,7 @@ vm.dirty_ratio = 10
 vm.dirty_background_ratio = 5
 vm.dirty_expire_centisecs = 12000
 vm.overcommit_memory = 1
-kernel.sched_energy_aware = 1" | sudo tee /etc/sysconf.conf
+kernel.sched_energy_aware = 1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
