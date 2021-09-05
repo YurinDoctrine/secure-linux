@@ -55,7 +55,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw reload
 
-#--Harden /etc/sysctl.conf
+#--Harden /etc/sysctl
 echo -e "kernel.dmesg_restrict = 1
 kernel.modules_disabled=1
 kernel.kptr_restrict = 1
