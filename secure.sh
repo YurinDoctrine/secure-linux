@@ -56,9 +56,9 @@ sudo ufw default allow outgoing
 sudo ufw reload
 
 #--Harden /etc/sysctl
-echo -e "kernel.sched_energy_aware = 1
+#echo -e "kernel.sched_energy_aware = 1
 kernel.dmesg_restrict = 1
-#kernel.modules_disabled=1
+kernel.modules_disabled=1
 kernel.kptr_restrict = 1
 net.core.bpf_jit_harden=2
 kernel.yama.ptrace_scope=3
@@ -93,7 +93,7 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 net.ipv6.icmp.echo_ignore_all = 1
 vm.dirty_background_bytes = 4194304
-vm.dirty_bytes = 4194304" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+#vm.dirty_bytes = 4194304" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
