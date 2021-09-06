@@ -56,41 +56,8 @@ sudo ufw default allow outgoing
 sudo ufw reload
 
 #--Harden /etc/sysctl
-#echo -e "kernel.sched_energy_aware = 1
-kernel.modules_disabled=1
-kernel.kptr_restrict = 1
-net.core.bpf_jit_harden=2
-kernel.yama.ptrace_scope=3
-kernel.kexec_load_disabled = 1
-net.ipv4.tcp_rfc1337=1
-net.ipv4.conf.default.rp_filter=1
-net.ipv4.conf.all.rp_filter=1
-net.ipv4.tcp_sack=1
-net.ipv4.tcp_fack=1
-net.ipv4.tcp_low_latency=1
-net.ipv4.ip_no_pmtu_disc=0
-net.ipv4.tcp_mtu_probing=1
-net.ipv4.tcp_fastopen = 3
-net.ipv4.tcp_frto=2
-net.ipv4.tcp_frto_response=2
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_rfc1337 = 1
-net.ipv4.tcp_timestamps = 0
-net.ipv4.ip_forward = 1
-net.ipv4.conf.default.log_martians = 1
-net.ipv4.conf.all.log_martians = 1
-net.ipv4.conf.all.accept_redirects = 0
-net.ipv4.conf.default.accept_redirects = 0
-net.ipv4.conf.all.secure_redirects = 0
-net.ipv4.conf.default.secure_redirects = 0
-net.ipv6.conf.all.accept_redirects = 0
-net.ipv6.conf.default.accept_redirects = 0
-net.ipv4.conf.all.send_redirects = 0
-net.ipv4.conf.default.send_redirects = 0
-net.ipv4.icmp_echo_ignore_all = 1
-net.ipv6.icmp.echo_ignore_all = 1
-vm.dirty_background_bytes = 4194304
-#vm.dirty_bytes = 4194304" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+echo -e "net.ipv4.conf.default.rp_filter=1
+net.ipv4.conf.all.rp_filter=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -a
 sudo sysctl -A
 sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
