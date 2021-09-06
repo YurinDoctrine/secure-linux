@@ -58,7 +58,7 @@ sudo ufw reload
 #--Harden /etc/sysctl
 echo -e "kernel.sched_energy_aware = 1
 kernel.dmesg_restrict = 1
-kernel.modules_disabled=1
+#kernel.modules_disabled=1
 kernel.kptr_restrict = 1
 net.core.bpf_jit_harden=2
 kernel.yama.ptrace_scope=3
