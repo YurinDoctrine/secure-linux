@@ -116,7 +116,7 @@ sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
 #--Mask apparmor
-sudo systemctl mask apparmor  >/dev/null 2>&1
+sudo systemctl mask apparmor >/dev/null 2>&1
 
 #--Clean the logs
 sudo rm -rfd ~/.bash_history /var/log/*
