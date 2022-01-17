@@ -2,7 +2,7 @@
 
 # MIT License
 
-# Copyright (c) 2020-2021 YURIN
+# Copyright (c) 2020-2022 Yurin
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -57,20 +57,19 @@ sudo ufw default allow outgoing
 sudo ufw reload
 
 #--Harden /etc/sysctl
-echo -e "net.ipv4.tcp_tw_reuse=1
-net.ipv4.tcp_orphan_retries=2
+echo -e "net.ipv6.conf.default.disable_ipv6=1
+net.ipv6.conf.all.disable_ipv6=1
+net.ipv6.conf.lo.disable_ipv6=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
-net.ipv6.conf.all.disable_ipv6=1
-net.ipv6.conf.default.disable_ipv6=1
-net.ipv6.conf.lo.disable_ipv6=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
-sudo sysctl -a
-sudo sysctl -A
-sudo sysctl -a --pattern 'net.ipv4.conf.(eth|wlan)0.arp'
+net.ipv4.conf.all.send_redirects=0
+net.ipv4.conf.all.arp_notify=1
+net.ipv4.tcp_tw_reuse=1
+net.ipv4.tcp_orphan_retries=2" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
-multi on" | sudo tee -a /etc/host.conf
+multi on" | sudo tee /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
