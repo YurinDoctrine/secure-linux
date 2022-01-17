@@ -2,7 +2,7 @@
 
 # MIT License
 
-# Copyright (c) 2020-2022 Yurin
+# Copyright (c) 2020-2022 Yurin Doctrine
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
