@@ -50,13 +50,12 @@ sudo ufw --force enable
 sudo ufw limit 22/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
-sudo ufw allow in on lo
-sudo ufw allow out on lo
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw reload
+sudo ufw allow in on lo
+sudo ufw allow out on lo
 
-#--Harden /etc/sysctl
+#--Harden sysctl configs
 echo -e "net.ipv6.conf.default.disable_ipv6=1
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.lo.disable_ipv6=1
@@ -115,11 +114,11 @@ sudo killall -9 httpd
 sudo certbot renew
 sudo killall -HUP httpd
 
-#--Harden host
+#--Harden hosts
 sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
-#--Disable apparmor
+#--Disable apparmor service
 sudo systemctl disable apparmor.service
 
 #--Clean the logs
