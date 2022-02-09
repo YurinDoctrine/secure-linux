@@ -67,7 +67,10 @@ net.ipv4.tcp_tw_reuse=1
 net.ipv4.tcp_orphan_retries=2
 net.ipv4.tcp_syncookies=1
 net.ipv4.tcp_abort_on_overflow=0
-net.ipv4.tcp_tw_recycle=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+net.ipv4.tcp_tw_recycle=1
+net.ipv4.tcp_retries2=5
+net.ipv4.tcp_syn_retries=5
+net.ipv4.tcp_fin_timeout=15" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
