@@ -125,7 +125,7 @@ sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
 #--Disable apparmor service
-sudo systemctl disable apparmor.service
+sudo systemctl mask apparmor.service
 
 #--Clean the logs
 sudo rm -rfd ~/.bash_history /var/log/*
