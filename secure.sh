@@ -104,6 +104,12 @@ sudo chmod 0750 /home/*
 #--Remove no password sudo rights
 sudo sed -i -e 's/^%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
+#--Disable crashes
+sudo sed -i -e 's/^#DumpCore=.*/DumpCore=no/' /etc/systemd/system.conf
+sudo sed -i -e 's/^#CrashShell=.*/CrashShell=no/' /etc/systemd/system.conf
+sudo sed -i -e 's/^#DumpCore=.*/DumpCore=no/' /etc/systemd/user.conf
+sudo sed -i -e 's/^#CrashShell=.*/CrashShell=no/' /etc/systemd/user.conf
+
 #--Fix jail.local
 echo -e "[DEFAULT]
  ignoreip = 127.0.0.1/8 ::1
