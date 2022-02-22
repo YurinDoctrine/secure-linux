@@ -71,6 +71,8 @@ net.ipv4.tcp_tw_recycle=1
 net.ipv4.tcp_retries2=5
 net.ipv4.tcp_syn_retries=5
 net.ipv4.tcp_fin_timeout=15
+net.ipv4.tcp_fack=0
+net.ipv4.tcp_dsack=0
 net.ipv4.tcp_sack=0" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 #--PREVENT IP SPOOFS
