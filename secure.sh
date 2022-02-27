@@ -73,7 +73,8 @@ net.ipv4.tcp_syn_retries=5
 net.ipv4.tcp_fin_timeout=15
 net.ipv4.tcp_fack=0
 net.ipv4.tcp_dsack=0
-net.ipv4.tcp_sack=0" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+net.ipv4.tcp_sack=0
+net.ipv4.tcp_workaround_signed_windows=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
