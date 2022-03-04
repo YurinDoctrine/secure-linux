@@ -59,6 +59,7 @@ sudo ufw allow out on lo
 echo -e "net.ipv6.conf.default.disable_ipv6=1
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.lo.disable_ipv6=1
+net.ipv6.icmp_echo_ignore_all=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
 net.ipv4.conf.all.send_redirects=0
