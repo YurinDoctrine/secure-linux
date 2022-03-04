@@ -134,6 +134,9 @@ sudo killall -HUP httpd
 sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
+#--Secure dns
+sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
+
 #--Disable apparmor service
 sudo systemctl mask apparmor.service
 
