@@ -57,9 +57,6 @@ sudo ufw allow out on lo
 
 #--Harden sysctl configs
 echo -e "net.ipv6.conf.default.disable_ipv6=1
-net.ipv6.conf.all.disable_ipv6=1
-net.ipv6.conf.lo.disable_ipv6=1
-net.ipv6.icmp_echo_ignore_all=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
 net.ipv4.conf.all.send_redirects=0
@@ -75,7 +72,8 @@ net.ipv4.tcp_fin_timeout=15
 net.ipv4.tcp_fack=0
 net.ipv4.tcp_dsack=0
 net.ipv4.tcp_sack=0
-net.ipv4.tcp_workaround_signed_windows=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+net.ipv4.tcp_workaround_signed_windows=1
+net.ipv4.icmp_echo_ignore_all=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
