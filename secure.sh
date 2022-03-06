@@ -74,6 +74,7 @@ net.ipv4.tcp_dsack=0
 net.ipv4.tcp_sack=0
 net.ipv4.tcp_workaround_signed_windows=1
 net.ipv4.icmp_echo_ignore_all=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+sudo sysctl -p --system
 
 #--PREVENT IP SPOOFS
 echo -e "order bind,hosts
