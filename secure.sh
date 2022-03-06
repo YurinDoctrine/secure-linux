@@ -134,8 +134,11 @@ sudo chmod 644 /etc/hosts.deny
 #--Secure dns
 sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 
-#--Disable apparmor service
+#--Disable apparmor
 sudo systemctl mask apparmor.service
+
+#--Disable cron
+sudo systemctl mask cron.service
 
 #--Clean the logs
 sudo rm -rfd ~/.bash_history /var/log/*
