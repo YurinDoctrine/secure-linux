@@ -99,9 +99,6 @@ sudo sed -i -e 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 
-#--Consider restricting file permissions
-sudo chmod og-rwx /etc/cron.*
-
 #--Double check the permissions of home directories as some might be not strict enough.
 sudo chmod 0750 /home/*
 
