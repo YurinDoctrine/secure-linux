@@ -26,7 +26,7 @@
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo apt update &&
-        sudo apt install -f --assume-yes --no-install-recommends openssl ufw fail2ban libsecret-1-0 net-tools unattended-upgrades proxychains ca-certificates certbot iwd anacron &&
+        sudo apt install -f --assume-yes --no-install-recommends openssl ufw fail2ban libsecret-1-0 net-tools unattended-upgrades proxychains ca-certificates certbot iwd anacron seccomp cryptsetup &&
         sudo apt install -f --assume-yes doas
     echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
@@ -40,7 +40,7 @@ fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
-        yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas iwd cronie
+        yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas iwd cronie libseccomp cryptsetup
 fi
 
 clear
