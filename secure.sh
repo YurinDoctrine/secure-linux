@@ -134,6 +134,10 @@ sudo chmod 644 /etc/hosts.deny
 #--Secure dns
 sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 
+#--Limit PAM
+echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
+echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
+
 #--Disable apparmor
 sudo systemctl mask apparmor.service
 
