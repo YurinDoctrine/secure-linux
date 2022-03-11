@@ -54,7 +54,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow in on lo
 sudo ufw allow out on lo
-sudo systemctl enable ufw
+sudo systemctl enable --now ufw
 
 #--Harden sysctl configs
 echo -e "net.ipv6.conf.default.disable_ipv6=1
@@ -122,6 +122,7 @@ echo -e "[DEFAULT]
 
 [sshd]
  enabled = true" | sudo tee /etc/fail2ban/jail.local
+sudo systemctl enable --now fail2ban
 
 #--Renew certificates
 sudo killall -9 httpd
