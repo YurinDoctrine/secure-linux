@@ -41,8 +41,7 @@ fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
-        sudo pacman -Syy --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot cronie libseccomp cryptsetup iwd
-        sudo pacman -Syy --needed --noconfirm doas
+        yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas cronie libseccomp cryptsetup iwd
 fi
 
 clear
