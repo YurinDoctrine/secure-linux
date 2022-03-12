@@ -22,11 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#--Required Packages: ufw fail2ban net-tools certbot iwd
+#--Required Packages: ufw fail2ban net-tools certbot iwd gnutls
 which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo apt update &&
-        sudo apt install -f --assume-yes --no-install-recommends openssl ufw fail2ban libsecret-1-0 net-tools unattended-upgrades proxychains ca-certificates certbot anacron seccomp cryptsetup iwd &&
+        sudo apt install -f --assume-yes --no-install-recommends openssl ufw fail2ban libsecret-1-0 net-tools unattended-upgrades proxychains ca-certificates certbot anacron seccomp cryptsetup iwd gnutls-bin &&
         sudo apt install -f --assume-yes doas
         sudo apt install -f --assume-yes apt-transport-https
     echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee /etc/apt/apt.conf.d/50unattended-upgrades
@@ -41,7 +41,7 @@ fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
-        yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas cronie libseccomp cryptsetup iwd
+        yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas cronie libseccomp cryptsetup iwd gnutls
 fi
 
 clear
