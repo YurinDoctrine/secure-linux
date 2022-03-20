@@ -43,9 +43,13 @@ if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
         yay -S --needed --noconfirm openssl ufw fail2ban libsecret net-tools proxychains ca-certificates certbot doas cronie libseccomp cryptsetup iwd gnutls
 fi
+which dnf >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    sudo dnf search u
+    sudo dnf install openssl ufw fail2ban libsecret net-tools proxychains-ng ca-certificates certbot doas cronie libseccomp cryptsetup iwd gnutls -y
+fi
 
 clear
-
 #--Setup UFW rules
 sudo ufw --force enable
 sudo ufw limit 22/tcp
