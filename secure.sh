@@ -47,7 +47,7 @@ which dnf >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo dnf search u
     sudo dnf install openssl ufw fail2ban libsecret net-tools proxychains-ng ca-certificates certbot doas cronie libseccomp cryptsetup iwd gnutls -y
-    sudo dnf install ruby-tty-cursor terminus-fonts
+    sudo dnf install terminus-fonts
 fi
 
 clear
