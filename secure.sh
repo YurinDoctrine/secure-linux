@@ -51,6 +51,10 @@ if [ $? -eq 0 ]; then
 fi
 
 clear
+echo -e "Configuring vconsole.conf to set a larger font for login shell"
+echo -e "FONT=ter-v22b
+FONT_MAP=8859-2" | sudo tee /etc/vconsole.conf
+
 #--Setup UFW rules
 sudo ufw --force enable
 sudo ufw limit 22/tcp
