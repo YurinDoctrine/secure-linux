@@ -62,7 +62,8 @@ sudo ufw allow out on lo
 sudo systemctl enable --now ufw
 
 #--Harden sysctl configs
-echo -e "net.ipv6.conf.default.disable_ipv6=1
+echo -e "fs.file-max = 100000
+net.ipv6.conf.default.disable_ipv6=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
 net.ipv4.conf.all.send_redirects=0
