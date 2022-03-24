@@ -153,6 +153,9 @@ echo -e "options timeout:5 attempts:5 single-request-reopen no-tld-query" | sudo
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
 
+#--Reveal boot messages
+sudo sed -i -e 's/^TTYVTDisallocate=yes/TTYVTDisallocate=no/' /etc/systemd/system/getty.target.wants/getty@tty1.service
+
 #--Disable apparmor
 sudo systemctl mask apparmor.service
 
@@ -160,7 +163,7 @@ sudo systemctl mask apparmor.service
 sudo systemctl mask cron.service
 
 #--Clean the logs
-sudo rm -rfd ~/.bash_history /var/log/*
+sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /etc/machine-id /var/lib/systemd/random-seed /var/log/{.*,*}
 
 extra() {
     cd /tmp
