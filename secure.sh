@@ -163,7 +163,7 @@ sudo systemctl mask apparmor.service
 sudo systemctl mask cron.service
 
 #--Clean the logs
-sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/log/{.*,*}
+sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*}
 
 extra() {
     cd /tmp
