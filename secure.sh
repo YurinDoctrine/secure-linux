@@ -46,7 +46,7 @@ which dnf >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo dnf check-update
     sudo dnf install openssl ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains-ng ca-certificates certbot doas cronie libseccomp cryptsetup iwd gnutls libpipeline -y
-    sudo dnf install terminus-fonts
+    sudo dnf install terminus-fonts -y
 fi
 
 clear
