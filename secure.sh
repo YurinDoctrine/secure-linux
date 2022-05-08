@@ -162,8 +162,10 @@ sudo systemctl mask apparmor.service
 #--Disable cron
 sudo systemctl mask cron.service
 
-#--Clean the logs
-sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*}
+#--Clear the footprints
+sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} &> /dev/null
+sudo rm -rfd /home/*/.local/share/Trash/*/** &> /dev/null
+sudo rm -rfd /root/.local/share/Trash/*/** &> /dev/null
 
 extra() {
     cd /tmp
