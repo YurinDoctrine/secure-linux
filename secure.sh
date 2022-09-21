@@ -171,6 +171,7 @@ sudo systemctl mask cron.service
 echo -e "[main]
 dns=none
 rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf
+sudo service network-manager restart
 
 #--Clear the footprints
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
