@@ -167,6 +167,11 @@ sudo systemctl mask apparmor.service
 #--Disable cron
 sudo systemctl mask cron.service
 
+#--Prevent NetworkManager handling resolv.conf
+echo -e "[main]
+dns=none
+rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf
+
 #--Clear the footprints
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
 sudo rm -rfd /home/*/.local/share/Trash/*/** &> /dev/null
