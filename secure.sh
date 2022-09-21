@@ -150,10 +150,6 @@ sudo killall -HUP httpd
 sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
-#--Secure dns
-sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
-echo -e "options timeout:5 attempts:5 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
-
 #--Limit PAM
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
@@ -172,6 +168,14 @@ echo -e "[main]
 dns=none
 rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf
 sudo service network-manager restart
+
+#--Secure dns
+if [[ -z $(grep "nameserver" /etc/resolv.conf) ]]; then
+    echo -e "nameserver 9.9.9.11" | sudo tee -a /etc/resolv.conf
+else
+    sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
+fi
+echo -e "options timeout:5 attempts:5 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
 
 #--Clear the footprints
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
