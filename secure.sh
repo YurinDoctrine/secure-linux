@@ -166,7 +166,8 @@ sudo systemctl mask cron.service
 #--Prevent NetworkManager handling resolv.conf
 echo -e "[main]
 dns=none
-rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf && sudo service network-manager restart
+rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf
+sudo service NetworkManager restart
 
 #--Secure dns
 if [[ -z $(grep "nameserver" /etc/resolv.conf) ]]; then
