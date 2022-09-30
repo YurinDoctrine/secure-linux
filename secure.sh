@@ -176,7 +176,7 @@ nameserver 149.112.112.11" | sudo tee -a /etc/resolv.conf
 else
     sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 fi
-echo -e "options timeout:5 attempts:5 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
+echo -e "options rotate timeout:1 attempts:3 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
 
 #--Clear the footprints
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
