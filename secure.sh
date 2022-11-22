@@ -88,6 +88,7 @@ net.ipv4.tcp_app_win=0
 net.ipv4.tcp_thin_linear_timeouts=1
 net.ipv4.udp_rmem_min=8192
 net.ipv4.udp_wmem_min=8192
+net.ipv4.udp_early_demux=1
 net.ipv4.icmp_echo_ignore_all=1
 net.ipv4.route.flush=1
 net.ipv4.ipfrag_time=0
