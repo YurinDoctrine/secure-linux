@@ -172,7 +172,8 @@ sudo service NetworkManager restart
 #--Secure dns
 if [[ -z $(grep "nameserver" /etc/resolv.conf) ]]; then
     echo -e "nameserver 9.9.9.11
-nameserver 149.112.112.11" | sudo tee -a /etc/resolv.conf
+nameserver 149.112.112.11
+nameserver 127.0.0.1" | sudo tee -a /etc/resolv.conf
 else
     sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 fi
