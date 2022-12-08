@@ -87,6 +87,7 @@ net.ipv4.tcp_workaround_signed_windows=1
 net.ipv4.tcp_ecn_fallback=0
 net.ipv4.tcp_app_win=0
 net.ipv4.tcp_thin_linear_timeouts=1
+net.ipv4.tcp_rfc1337=1
 net.ipv4.udp_rmem_min=8192
 net.ipv4.udp_wmem_min=8192
 net.ipv4.udp_early_demux=1
