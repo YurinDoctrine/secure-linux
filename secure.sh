@@ -70,7 +70,6 @@ net.ipv6.conf.default.disable_ipv6=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
 net.ipv4.conf.all.send_redirects=0
-net.ipv4.conf.all.arp_notify=1
 net.ipv4.conf.all.accept_source_route=0
 net.ipv4.conf.all.arp_evict_nocarrier=1
 net.ipv4.conf.all.log_martians=0
