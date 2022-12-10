@@ -96,6 +96,7 @@ net.ipv4.udp_early_demux=1
 net.ipv4.icmp_echo_ignore_all=1
 net.ipv4.route.flush=1
 net.ipv4.ipfrag_time=0
+net.ipv4.ipfrag_secret_interval=0
 net.core.default_qdisc=fq_pie
 net.core.busy_read=50" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -p --system
