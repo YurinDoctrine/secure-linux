@@ -90,6 +90,7 @@ net.ipv4.tcp_ecn_fallback=0
 net.ipv4.tcp_app_win=0
 net.ipv4.tcp_thin_linear_timeouts=1
 net.ipv4.tcp_rfc1337=1
+net.ipv4.tcp_adv_win_scale=1
 net.ipv4.udp_rmem_min=8192
 net.ipv4.udp_wmem_min=8192
 net.ipv4.udp_early_demux=1
@@ -99,7 +100,8 @@ net.ipv4.ipfrag_time=0
 net.ipv4.ipfrag_secret_interval=0
 net.core.default_qdisc=fq_pie
 net.core.busy_read=50
-net.core.high_order_alloc_disable=0" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+net.core.high_order_alloc_disable=0
+net.core.warnings=0" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -p --system
 
 #--PREVENT IP SPOOFS
