@@ -162,9 +162,9 @@ sudo chmod 644 /etc/hosts.allow
 sudo chmod 644 /etc/hosts.deny
 
 #--Limit PAM
-echo -e "session required pam_limits.so" | sudo tee /etc/pam.d/common-session
-echo -e "session required pam_limits.so" | sudo tee /etc/pam.d/common-session-noninteractive
-echo -e "auth optional pam_faildelay.so delay=5000000" | sudo tee /etc/pam.d/system-login
+echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
+echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
+echo -e "auth optional pam_faildelay.so delay=5000000" | sudo tee -a /etc/pam.d/system-login
 
 #--Reveal boot messages
 sudo sed -i -e 's/^TTYVTDisallocate=yes/TTYVTDisallocate=no/' /etc/systemd/system/getty.target.wants/getty@tty1.service
