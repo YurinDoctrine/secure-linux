@@ -2,7 +2,7 @@
 
 # MIT License
 
-# Copyright (c) 2020-2022 Yurin Doctrine
+# Copyright (c) 2020-2023 Yurin Doctrine
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -174,6 +174,10 @@ sudo systemctl mask apparmor.service
 #--Disable cron
 sudo systemctl mask cron.service
 
+#--Enable MAC address randomization in NetworkManager
+echo -e "[connection-mac-randomization]
+wifi.cloned-mac-address=random
+ethernet.cloned-mac-address=random" | sudo tee /etc/NetworkManager/conf.d/mac-address-randomization.conf
 #--Prevent NetworkManager handling resolv.conf
 echo -e "[main]
 dns=none
