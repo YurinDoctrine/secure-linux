@@ -193,8 +193,8 @@ echo -e "[main]
 hostname-mode=none" | sudo tee /etc/NetworkManager/conf.d/transient-hostname.conf
 sudo hostnamectl --transient hostname ""
 sudo hostnamectl hostname "localhost"
-sudo hostnamectl set-hostname localhost
 sudo service NetworkManager restart
+sudo hostnamectl set-hostname localhost
 
 #--Secure dns
 if [[ -z $(grep "nameserver" /etc/resolv.conf) ]]; then
