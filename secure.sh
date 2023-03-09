@@ -128,8 +128,13 @@ sudo sed -i -e 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 
+#--Harden system files
+sudo chmod -R 0700 /root
+sudo chmod -R 0700 /boot /etc/{iptables,arptables,nftables}
+sudo chown root:root /boot/grub/grub.cfg
+sudo chmod og-rwx /boot/grub/grub.cfg
 #--Double check the permissions of home directories as some might be not strict enough.
-sudo chmod 0750 /home/*
+sudo chmod -R 0750 /home/*
 
 #--Remove no password sudo rights
 sudo sed -i -e 's/^%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
@@ -158,8 +163,8 @@ sudo certbot renew
 sudo killall -HUP httpd
 
 #--Harden hosts
-sudo chmod 644 /etc/hosts.allow
-sudo chmod 644 /etc/hosts.deny
+sudo chmod -R 0644 /etc/hosts.allow
+sudo chmod -R 0644 /etc/hosts.deny
 
 #--Limit PAM
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
