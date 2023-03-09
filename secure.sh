@@ -210,6 +210,9 @@ echo -e "options rotate timeout:1 attempts:3 single-request-reopen no-tld-query"
 sudo timedatectl set-ntp 0
 sudo systemctl mask systemd-timesyncd.service
 
+#--Disable Netfilter connection tracking helper
+echo -e "options nf_conntrack nf_conntrack_helper=0" | sudo tee /etc/modprobe.d/no-conntrack-helper.conf
+
 #--Update CA certificates
 sudo update-ca-trust
 
