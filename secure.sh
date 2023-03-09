@@ -175,7 +175,9 @@ sudo systemctl mask apparmor.service
 sudo systemctl mask cron.service
 
 #--Enable MAC address randomization in NetworkManager
-echo -e "[connection-mac-randomization]
+echo -e "[device]
+wifi.scan-rand-mac-address=yes
+[connection]
 wifi.cloned-mac-address=random
 ethernet.cloned-mac-address=random" | sudo tee /etc/NetworkManager/conf.d/mac-address-randomization.conf
 #--Prevent NetworkManager handling resolv.conf
