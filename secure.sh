@@ -48,7 +48,14 @@ if [ $? -eq 0 ]; then
     sudo dnf install openssl earlyoom ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains-ng ca-certificates certbot doas cronie cryptsetup iwd gnutls libpipeline gpm terminus-fonts usbguard clamav firejail -y
 fi
 
+#--Update firmware
+sudo fwupdmgr get-devices
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates -y
+sudo fwupdmgr update -y
+
 clear
+
 echo -e "Configuring vconsole.conf to set a larger font for login shell"
 echo -e "FONT=ter-v22b
 FONT_MAP=8859-2" | sudo tee /etc/vconsole.conf
