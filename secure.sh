@@ -27,7 +27,7 @@ which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo apt update &&
         sudo apt install -f --assume-yes --install-recommends doas
-    sudo apt install -f --assume-yes --install-recommends openssl earlyoom ufw fail2ban gnome-keyring libsecret-1-0 libpam-gnome-keyring net-tools unattended-upgrades proxychains ca-certificates certbot anacron cryptsetup iwd gnutls-bin libpipeline-dev gpm xfonts-terminus usbguard clamav
+    sudo apt install -f --assume-yes --install-recommends openssl earlyoom ufw fail2ban gnome-keyring libsecret-1-0 libpam-gnome-keyring net-tools unattended-upgrades proxychains ca-certificates certbot anacron cryptsetup iwd gnutls-bin libpipeline-dev gpm xfonts-terminus usbguard clamav firejail
     echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
     echo -e 'APT::Periodic::Download-Upgradeable-Packages "1";' | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
@@ -40,12 +40,12 @@ fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
-        yay -S --needed --noconfirm openssl earlyoom ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains ca-certificates certbot doas cronie cryptsetup iwd gnutls libpipeline gpm terminus-font usbguard clamav
+        yay -S --needed --noconfirm openssl earlyoom ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains ca-certificates certbot doas cronie cryptsetup iwd gnutls libpipeline gpm terminus-font usbguard clamav firejail
 fi
 which dnf >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo dnf check-update
-    sudo dnf install openssl earlyoom ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains-ng ca-certificates certbot doas cronie cryptsetup iwd gnutls libpipeline gpm terminus-fonts usbguard clamav -y
+    sudo dnf install openssl earlyoom ufw fail2ban gnome-keyring libsecret libgnome-keyring net-tools proxychains-ng ca-certificates certbot doas cronie cryptsetup iwd gnutls libpipeline gpm terminus-fonts usbguard clamav firejail -y
 fi
 
 clear
