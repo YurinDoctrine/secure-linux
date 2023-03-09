@@ -118,6 +118,7 @@ if [ $UID -gt 199 ] && [ "$(id -gn)" = "$(id -un)" ]; then
 else
     umask 027
 fi
+echo -e "umask 027" | sudo tee /etc/profile.d/umask.sh
 
 #--Configure minimum & maximum encryption algorithm rounds in /etc/login.defs
 sudo sed -i -e 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
