@@ -184,6 +184,11 @@ ethernet.cloned-mac-address=random" | sudo tee /etc/NetworkManager/conf.d/mac-ad
 echo -e "[main]
 dns=none
 rc-manager=unmanaged" | sudo tee /etc/NetworkManager/conf.d/prevent-nm-handle-dns.conf
+#--Disable transient hostname in NetworkManager
+echo -e "[main]
+hostname-mode=none" | sudo tee /etc/NetworkManager/conf.d/transient-hostname.conf
+sudo hostnamectl --transient hostname ""
+sudo hostnamectl hostname "localhost"
 sudo service NetworkManager restart
 
 #--Secure dns
