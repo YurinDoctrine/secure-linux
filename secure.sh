@@ -175,9 +175,6 @@ echo -e "auth optional pam_faildelay.so delay=5000000" | sudo tee -a /etc/pam.d/
 #--Reveal boot messages
 sudo sed -i -e 's/^TTYVTDisallocate=yes/TTYVTDisallocate=no/' /etc/systemd/system/getty.target.wants/getty@tty1.service
 
-#--Disable apparmor
-sudo systemctl mask apparmor.service
-
 #--Disable cron
 sudo systemctl mask cron.service
 
