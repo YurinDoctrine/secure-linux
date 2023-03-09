@@ -201,6 +201,10 @@ else
 fi
 echo -e "options rotate timeout:1 attempts:3 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
 
+#--Disable NTP
+sudo timedatectl set-ntp 0
+sudo systemctl mask systemd-timesyncd.service
+
 #--Update CA certificates
 sudo update-ca-trust
 
