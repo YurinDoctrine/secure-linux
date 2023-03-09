@@ -196,6 +196,9 @@ else
 fi
 echo -e "options rotate timeout:1 attempts:3 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
 
+#--Update CA certificates
+sudo update-ca-trust
+
 #--Clear the footprints
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
 sudo rm -rfd /home/*/.local/share/Trash/*/** &> /dev/null
