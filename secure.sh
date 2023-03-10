@@ -72,7 +72,9 @@ sudo ufw allow out on lo
 sudo systemctl enable --now ufw
 
 #--Harden sysctl configs
-echo -e "fs.file-max=100000
+echo -e "fs.file-max=9000000
+fs.nr_open=12000000
+fs.aio-max-nr=524288
 net.ipv6.conf.default.disable_ipv6=1
 net.ipv4.conf.default.rp_filter=1
 net.ipv4.conf.all.rp_filter=1
