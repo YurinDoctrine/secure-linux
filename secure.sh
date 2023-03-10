@@ -214,7 +214,7 @@ nameserver 127.0.0.1" | sudo tee -a /etc/resolv.conf
 else
     sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 fi
-echo -e "options rotate timeout:1 attempts:3 edns0 single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
+echo -e "options rotate timeout:1 attempts:3 edns0 single-request-reopen use-vc no-tld-query" | sudo tee -a /etc/resolv.conf
 
 #--Disable NTP
 sudo timedatectl set-ntp 0
