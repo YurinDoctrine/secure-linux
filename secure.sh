@@ -179,6 +179,7 @@ sudo chmod -R 0644 /etc/hosts.deny
 #--Limit PAM
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
 echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
+echo -e "session required pam_limits.so" | sudo tee -a /etc/pam.d/runuser-l
 echo -e "auth optional pam_faildelay.so delay=5000000" | sudo tee -a /etc/pam.d/system-login
 
 #--Reveal boot messages
