@@ -115,7 +115,8 @@ net.core.tstamp_allow_data=1" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -p --system
 
 #--PREVENT IP SPOOFS
-echo -e "order bind,hosts,multi on" | sudo tee /etc/host.conf
+echo -e "order bind,hosts
+multi on" | sudo tee /etc/host.conf
 
 #--Pacify LLMNR
 sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
