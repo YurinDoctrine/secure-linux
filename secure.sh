@@ -130,8 +130,9 @@ fi
 echo -e "umask 027" | sudo tee /etc/profile.d/umask.sh
 
 #--Configure minimum & maximum encryption algorithm rounds in /etc/login.defs
-sudo sed -i -e 's/# SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
-sudo sed -i -e 's/# SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
+sudo sed -i -e 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 5000/g' /etc/login.defs
+sudo sed -i -e 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 50000/g' /etc/login.defs
+sudo sed -i -e 's/ENCRYPT_METHOD SHA256/ENCRYPT_METHOD SHA512/g' /etc/login.defs
 
 #--Configure /etc/proxychains.conf
 sudo sed -i -e 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
