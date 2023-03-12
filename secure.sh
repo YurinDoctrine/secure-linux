@@ -229,6 +229,8 @@ echo -e "options nf_conntrack nf_conntrack_helper=0" | sudo tee /etc/modprobe.d/
 sudo update-ca-trust
 
 #--Clear the footprints
+sudo find / -name '*.log' -type f -delete
+sudo find / -name '*.log.[0-9$]' -type f -delete
 sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_logout /var/lib/systemd/random-seed /var/log/{.*,*} /var/backups/{.*,*} &> /dev/null
 sudo rm -rfd /home/*/.local/share/Trash/*/** &> /dev/null
 sudo rm -rfd /root/.local/share/Trash/*/** &> /dev/null
