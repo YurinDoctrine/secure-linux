@@ -235,6 +235,10 @@ echo -e "options nf_conntrack nf_conntrack_helper=0" | sudo tee /etc/modprobe.d/
 #--Fix missing interfaces
 echo -e "source /etc/network/interfaces.d/*" | sudo tee /etc/network/interfaces
 
+#--Disable tracking services
+sudo systemctl mask auditd.service
+sudo systemctl mask nss-user-lookup.target
+
 #--Update CA certificates
 sudo update-ca-trust
 sudo update-ca-certificates
