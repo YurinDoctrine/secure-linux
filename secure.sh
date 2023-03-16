@@ -219,7 +219,11 @@ nameserver 127.0.0.1" | sudo tee -a /etc/resolv.conf
 else
     sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 fi
-echo -e "options rotate timeout:1 attempts:3 edns0 single-request-reopen use-vc no-tld-query" | sudo tee -a /etc/resolv.conf
+if [[ -z $(grep "options" /etc/resolv.conf) ]]; then
+    echo -e "options rotate timeout:1 attempts:3 edns0 trust-ad use-vc single-request-reopen no-tld-query" | sudo tee -a /etc/resolv.conf
+else
+    sudo sed -i -e 's/^options .*/options rotate timeout:1 attempts:3 edns0 trust-ad use-vc single-request-reopen no-tld-query/' /etc/resolv.conf
+fi
 
 #--Disable NTP
 sudo timedatectl set-ntp 0
@@ -230,6 +234,7 @@ echo -e "options nf_conntrack nf_conntrack_helper=0" | sudo tee /etc/modprobe.d/
 
 #--Update CA certificates
 sudo update-ca-trust
+sudo update-ca-certificates
 
 #--Clear the footprints
 sudo find / -name '*.log' -type f -delete
