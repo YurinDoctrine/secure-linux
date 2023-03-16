@@ -232,6 +232,9 @@ sudo systemctl mask systemd-timesyncd.service
 #--Disable Netfilter connection tracking helper
 echo -e "options nf_conntrack nf_conntrack_helper=0" | sudo tee /etc/modprobe.d/no-conntrack-helper.conf
 
+#--Fix missing interfaces
+echo -e "source /etc/network/interfaces.d/*" | sudo tee /etc/network/interfaces
+
 #--Update CA certificates
 sudo update-ca-trust
 sudo update-ca-certificates
