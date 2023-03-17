@@ -237,6 +237,7 @@ echo -e "source /etc/network/interfaces.d/*" | sudo tee /etc/network/interfaces
 
 #--Disable tracking services
 sudo systemctl mask auditd.service
+sudo systemctl mask nss-lookup.target
 sudo systemctl mask nss-user-lookup.target
 
 #--Update CA certificates
