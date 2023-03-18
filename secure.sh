@@ -243,6 +243,9 @@ sudo systemctl mask auditd.service
 sudo systemctl mask nss-lookup.target
 sudo systemctl mask nss-user-lookup.target
 
+#--Enable apparmor write-cache
+sudo sed -i -e 's/^#write-cache/write-cache/' /etc/apparmor/parser.conf
+
 #--Update CA certificates
 sudo update-ca-trust
 sudo update-ca-certificates
