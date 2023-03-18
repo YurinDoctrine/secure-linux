@@ -193,6 +193,9 @@ sudo sed -i -e 's/^TTYVTDisallocate=yes/TTYVTDisallocate=no/' /etc/systemd/syste
 #--Disable cron
 sudo systemctl mask cron.service
 
+#--Switch NetworkManager backend to iwd
+echo -e "[device]
+wifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/nm-backend.conf
 #--Enable MAC address randomization in NetworkManager
 echo -e "[device]
 wifi.scan-rand-mac-address=yes
