@@ -73,7 +73,9 @@ sudo ufw logging off
 sudo systemctl enable --now ufw
 
 #--Harden sysctl configs
-echo -e "fs.file-max=1048576
+echo -e "vm.mmap_rnd_bits=32
+vm.mmap_rnd_compat_bits=16
+fs.file-max=1048576
 fs.nr_open=1048576
 fs.aio-max-nr=524288
 fs.suid_dumpable=0
