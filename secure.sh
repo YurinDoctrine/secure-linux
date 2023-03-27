@@ -97,6 +97,7 @@ net.ipv4.conf.all.accept_source_route=0
 net.ipv4.conf.all.arp_evict_nocarrier=1
 net.ipv4.conf.all.arp_ignore=1
 net.ipv4.conf.all.log_martians=0
+net.ipv4.tcp_congestion_control=bbr
 net.ipv4.tcp_abc=0
 net.ipv4.tcp_tw_reuse=1
 net.ipv4.tcp_orphan_retries=2
