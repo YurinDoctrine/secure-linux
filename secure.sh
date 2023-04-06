@@ -242,6 +242,8 @@ if [[ -z $(grep "options" /etc/resolv.conf) ]]; then
 else
     sudo sed -i -e 's/^options .*/options rotate timeout:1 attempts:3 edns0 trust-ad use-vc single-request-reopen no-tld-query/' /etc/resolv.conf
 fi
+#--Disable dns cache
+echo -e "Cache=no" | sudo tee -a /etc/systemd/resolved.conf
 
 #--Disable NTP
 sudo timedatectl set-ntp 0
