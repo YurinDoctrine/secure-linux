@@ -277,6 +277,11 @@ sudo rm -rfd /root/.cache ~/.bash_history ~/.sudo_as_admin_successful ~/.bash_lo
 sudo rm -rfd /home/*/.local/share/Trash/*/** &>/dev/null
 sudo rm -rfd /root/.local/share/Trash/*/** &>/dev/null
 
+#--Run filesystem check
+sudo e2fsck -f /dev/sd*[!0-9]
+sudo e2fsck -f /dev/mmcblk*
+sudo e2fsck -f /dev/nvme*
+
 extra() {
     cd /tmp
     curl --tlsv1.2 -fsSL https://raw.githubusercontent.com/YurinDoctrine/pentest-base-popular/main/pentest-base-popular.sh >pentest-base-popular.sh &&
