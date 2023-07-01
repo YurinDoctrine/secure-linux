@@ -82,7 +82,6 @@ fs.protected_symlinks=1
 fs.protected_fifos=2
 fs.protected_regular=2
 fs.suid_dumpable=0
-kernel.unprivileged_userns_clone=0
 kernel.unprivileged_bpf_disabled=1
 kernel.yama.ptrace_scope=2
 kernel.dmesg_restrict=1
