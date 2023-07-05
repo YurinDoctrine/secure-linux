@@ -129,9 +129,9 @@ net.core.warnings=0
 net.core.tstamp_allow_data=1
 net.core.enable_tcp_offloading=1
 net.core.netdev_tstamp_prequeue=1
-net.core.netdev_max_backlog=32768
-net.core.somaxconn=32768
-net.core.optmem_max=32768" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+net.core.netdev_max_backlog=65535
+net.core.somaxconn=65535
+net.core.optmem_max=65535" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 sudo sysctl -p --system
 
 #--PREVENT IP SPOOFS
