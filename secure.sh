@@ -285,7 +285,7 @@ sudo e2fsck -f /dev/mmcblk*
 sudo e2fsck -f /dev/nvme*
 
 #--Optimize disk read-ahead
-echo -e 'ACTION=="add|change", KERNEL=="sd*[!0-9]|sr*|mmcblk[0-9]*|nvme[0-9]*", ATTR{bdi/read_ahead_kb}="128"' | sudo tee /etc/udev/rules.d/70-readahead.rules
+echo -e 'ACTION=="add|change", KERNEL=="sd*[!0-9]|sr*|mmcblk[0-9]*|nvme[0-9]*", ATTR{bdi/read_ahead_kb}="64", ATTR{queue/read_ahead_kb}="64", ATTR{queue/nr_requests}="32"' | sudo tee /etc/udev/rules.d/70-readahead.rules
 
 extra() {
     cd /tmp
