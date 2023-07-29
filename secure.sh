@@ -95,7 +95,7 @@ net.ipv4.conf.all.accept_source_route=0
 net.ipv4.conf.all.arp_evict_nocarrier=1
 net.ipv4.conf.all.arp_ignore=1
 net.ipv4.conf.all.log_martians=0
-net.ipv4.tcp_congestion_control=bbr2
+net.ipv4.tcp_congestion_control=dctcp
 net.ipv4.tcp_abc=0
 net.ipv4.tcp_tw_reuse=1
 net.ipv4.tcp_orphan_retries=2
@@ -265,10 +265,7 @@ sudo systemctl mask nss-user-lookup.target
 #--Enable apparmor write-cache
 sudo sed -i -e 's/^#write-cache/write-cache/' /etc/apparmor/parser.conf
 
-#--Enable bbr2 module
-echo -e "tcp_bbr
-tcp_bbr2" | sudo tee /etc/modules-load.d/bbr2.conf
-#--Alternatively enable dctcp
+#--Enable dctcp module
 echo -e "tcp_dctcp" | sudo tee /etc/modules-load.d/dctcp.conf
 
 #--Update CA certificates
