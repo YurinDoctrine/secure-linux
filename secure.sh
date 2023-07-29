@@ -266,7 +266,10 @@ sudo systemctl mask nss-user-lookup.target
 sudo sed -i -e 's/^#write-cache/write-cache/' /etc/apparmor/parser.conf
 
 #--Enable bbr2 module
-echo -e "tcp_bbr2" | sudo tee /etc/modules-load.d/bbr2.conf
+echo -e "tcp_bbr
+tcp_bbr2" | sudo tee /etc/modules-load.d/bbr2.conf
+#--Alternatively enable dctcp
+echo -e "tcp_dctcp" | sudo tee /etc/modules-load.d/dctcp.conf
 
 #--Update CA certificates
 sudo update-ca-trust
