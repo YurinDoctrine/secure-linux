@@ -27,7 +27,7 @@ which apt >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo apt update &&
         sudo apt install -f --assume-yes --install-recommends doas
-    sudo apt install -f --assume-yes --install-recommends openssl earlyoom ufw fail2ban libsecret-1-dev macchanger net-tools proxychains ca-certificates certbot anacron cryptsetup iwd lynis
+    sudo apt install -f --assume-yes --install-recommends openssl earlyoom ufw fail2ban libsecret-1-dev macchanger net-tools proxychains torsocks ca-certificates certbot anacron cryptsetup iwd lynis
     echo -e 'APT::Periodic::Unattended-Upgrade "1";' | sudo tee /etc/apt/apt.conf.d/50-unattended-upgrades
     echo -e 'APT::Periodic::AutocleanInterval "7";' | sudo tee -a /etc/apt/apt.conf.d/50-unattended-upgrades
     echo -e 'APT::Periodic::Download-Upgradeable-Packages "1";' | sudo tee -a /etc/apt/apt.conf.d/50-unattended-upgrades
@@ -39,12 +39,12 @@ fi
 which pacman >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman -Syy &&
-        yay -S --needed --noconfirm openssl earlyoom ufw fail2ban libsecret macchanger net-tools proxychains ca-certificates certbot doas cronie cryptsetup iwd lynis
+        yay -S --needed --noconfirm openssl earlyoom ufw fail2ban libsecret macchanger net-tools proxychains torsocks ca-certificates certbot doas cronie cryptsetup iwd lynis
 fi
 which dnf >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo dnf check-update
-    sudo dnf install openssl earlyoom ufw fail2ban libsecret macchanger net-tools proxychains-ng ca-certificates certbot doas cronie cryptsetup iwd lynis -y
+    sudo dnf install openssl earlyoom ufw fail2ban libsecret macchanger net-tools proxychains-ng torsocks ca-certificates certbot doas cronie cryptsetup iwd lynis -y
 fi
 
 #--Update firmware
