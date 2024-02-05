@@ -145,11 +145,11 @@ sudo sed -i -e 's/#LLMNR=yes/LLMNR=no/g' /etc/systemd/resolved.conf
 
 #--Default umask in /etc/profile or /etc/profile.d/custom.sh could be more strict
 if [ $UID -gt 199 ] && [ "$(id -gn)" = "$(id -un)" ]; then
-    umask 027
+    umask 077
 else
-    umask 027
+    umask 077
 fi
-echo -e "umask 027" | sudo tee /etc/profile.d/umask.sh
+echo -e "umask 077" | sudo tee /etc/profile.d/umask.sh
 
 #--Configure minimum & maximum encryption algorithm rounds in /etc/login.defs
 sudo sed -i -e 's/ENCRYPT_METHOD SHA256/ENCRYPT_METHOD SHA512/g' /etc/login.defs
