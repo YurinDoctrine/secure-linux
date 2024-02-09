@@ -47,12 +47,6 @@ if [ $? -eq 0 ]; then
     sudo dnf install openssl earlyoom ufw fail2ban libsecret macchanger net-tools proxychains-ng torsocks ca-certificates certbot doas cronie cryptsetup iwd lynis -y
 fi
 
-#--Update firmware
-sudo fwupdmgr get-devices
-sudo fwupdmgr refresh --force
-sudo fwupdmgr get-updates -y
-sudo fwupdmgr update -y
-
 clear
 
 echo -e "Configuring vconsole.conf to set a larger font for login shell"
