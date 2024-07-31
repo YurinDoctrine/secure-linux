@@ -283,7 +283,9 @@ echo -e 'ACTION=="add|change", KERNEL=="sd*[!0-9]|sr*|mmcblk[0-9]*|nvme[0-9]*", 
 #--Optimize disk read-ahead
 echo -e 'ACTION=="add|change", KERNEL=="sd*[!0-9]|sr*|mmcblk[0-9]*|nvme[0-9]*", ATTR{bdi/read_ahead_kb}="64", ATTR{queue/read_ahead_kb}="64", ATTR{queue/nr_requests}="32"' | sudo tee /etc/udev/rules.d/70-readahead.rules
 #--Optimize udev
-sudo sed -i -e 's/^#resolve_names=early/resolve_names=early/' /etc/udev/udev.conf
+sudo sed -i -e 's/^#udev_log=info/udev_log=err/' /etc/udev/udev.conf
+sudo sed -i -e 's/^#exec_delay=/exec_delay=0/' /etc/udev/udev.conf
+sudo sed -i -e 's/^#resolve_names=early/resolve_names=never/' /etc/udev/udev.conf
 
 extra() {
     cd /tmp
