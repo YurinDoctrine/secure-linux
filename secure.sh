@@ -232,9 +232,9 @@ else
     sudo sed -i -e 's/^nameserver .*/nameserver 9.9.9.11/' /etc/resolv.conf
 fi
 if [[ -z $(grep "options" /etc/resolv.conf) ]]; then
-    echo -e "options rotate timeout:1 attempts:3 edns0 trust-ad use-vc single-request-reopen no-tld-query bogus-priv stop-dns-rebind domain-needed" | sudo tee -a /etc/resolv.conf
+    echo -e "options timeout:1 attempts:3 trust-ad single-request bogus-priv stop-dns-rebind domain-needed" | sudo tee -a /etc/resolv.conf
 else
-    sudo sed -i -e 's/^options .*/options rotate timeout:1 attempts:3 edns0 trust-ad use-vc single-request-reopen no-tld-query bogus-priv stop-dns-rebind domain-needed/' /etc/resolv.conf
+    sudo sed -i -e 's/^options .*/options timeout:1 attempts:3 trust-ad single-request bogus-priv stop-dns-rebind domain-needed/' /etc/resolv.conf
 fi
 #--Disable dns cache
 echo -e "Cache=no" | sudo tee -a /etc/systemd/resolved.conf
