@@ -76,6 +76,7 @@ fs.protected_symlinks=1
 fs.protected_fifos=2
 fs.protected_regular=2
 fs.suid_dumpable=0
+kernel.split_lock_mitigate=0
 kernel.unprivileged_bpf_disabled=1
 kernel.dmesg_restrict=1
 net.ipv6.conf.default.disable_ipv6=1
