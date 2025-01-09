@@ -155,6 +155,10 @@ sudo sed -i -e 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
 sudo sed -i -e 's/#proxy_chain/proxy_chain/g' /etc/proxychains.conf
 
+#--Configure iptables
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
 #--Harden system files
 sudo chmod -R 0700 /root
 sudo chmod -R 0700 /boot /etc/{iptables,arptables,nftables}
