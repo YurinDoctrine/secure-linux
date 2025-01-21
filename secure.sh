@@ -66,7 +66,8 @@ sudo ufw logging off
 sudo systemctl enable --now ufw
 
 #--Harden sysctl configs
-echo -e "vm.mmap_rnd_bits=32
+echo -e "vm.min_free_kbytes=2048
+vm.mmap_rnd_bits=32
 vm.mmap_rnd_compat_bits=16
 fs.file-max=1048576
 fs.nr_open=1048576
