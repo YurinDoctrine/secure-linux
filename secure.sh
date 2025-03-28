@@ -195,6 +195,7 @@ sudo certbot renew
 sudo killall -HUP httpd
 
 #--Harden hosts
+sudo wget -qO /etc/hosts https://github.com/StevenBlack/hosts/raw/refs/heads/master/alternates/fakenews-gambling-porn-social/hosts && sudo sed -i -e 's/#.*0.0.0.0/0.0.0.0/g' /etc/hosts
 sudo chmod -R 0644 /etc/hosts.allow
 sudo chmod -R 0644 /etc/hosts.deny
 
